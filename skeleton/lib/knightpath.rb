@@ -6,7 +6,7 @@ class KnightPathFinder
   def initialize(pos)
     @root_node = PolyTreeNode.new(pos)
     @visited_positions = [pos]
-    # build_move_tree
+    build_move_tree
   end
   
   def find_path(pos)
@@ -22,6 +22,7 @@ class KnightPathFinder
       best_path.unshift(current_node.value)
       current_node = current_node.parent
     end
+    best_path
   end
   
   def build_move_tree
@@ -56,21 +57,21 @@ class KnightPathFinder
   
   def get_north(pos)
     row, col = pos
-    [[row - 3, col + 1], [row - 3, col - 1]]
+    [[row - 2, col + 1], [row - 2, col - 1]]
   end
   
   def get_south(pos)
     row, col = pos
-    [[row + 3, col + 1], [row + 3, col - 1]]
+    [[row + 2, col + 1], [row + 2, col - 1]]
   end
   
   def get_east(pos)
     row, col = pos
-    [[row - 1, col + 3], [row + 1, col + 3]]
+    [[row - 1, col + 2], [row + 1, col + 2]]
   end
   
   def get_west(pos)
     row, col = pos
-    [[row - 1, col - 3], [row + 1, col - 3]]
+    [[row - 1, col - 2], [row + 1, col - 2]]
   end
 end
