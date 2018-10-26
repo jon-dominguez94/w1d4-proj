@@ -5,11 +5,22 @@ class KnightPathFinder
   
   def initialize(pos)
     @root_node = PolyTreeNode.new(pos)
-    build_move_tree
     @visited_positions = [pos]
+    build_move_tree
   end
   
   def build_move_tree
+    # debugger
+    queue = [@root_node]
+    until queue.empty?
+      current_node = queue.shift
+      new_move_positions(current_node.value).each do |pos|
+        child = PolyTreeNode.new(pos)
+        child.parent = current_node
+        queue << child
+      end 
+      
+    end
     
   end
   
