@@ -20,16 +20,11 @@ class PolyTreeNode
   end
   
   def parent=(node)
-    # debugger
     if node == nil
       @parent.children.delete(self) unless @parent == nil
     else
-      if @parent != node && @parent
-        @parent.children.delete(self)
-      end
-      unless node.children.include?(self) 
-        node.children << self
-      end
+      @parent.children.delete(self) if @parent != node && @parent
+      node.children << self unless node.children.include?(self) 
     end
     @parent = node 
   end
@@ -41,8 +36,15 @@ class PolyTreeNode
   def remove_child(node)
     raise if !@children.include?(node)
     node.parent = nil
-    
-    
+  end
+  
+  def dfs(target)
+    return self if self.value == target
+    @children.each do |child|
+      result = child.dfs(target)
+      return result if result
+    end
+    return nil
   end
   
 end
