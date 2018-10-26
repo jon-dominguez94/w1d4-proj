@@ -6,7 +6,22 @@ class KnightPathFinder
   def initialize(pos)
     @root_node = PolyTreeNode.new(pos)
     @visited_positions = [pos]
-    build_move_tree
+    # build_move_tree
+  end
+  
+  def find_path(pos)
+    end_node = @root_node.dfs(pos)
+    trace_path_back(end_node)
+  
+  end
+  
+  def trace_path_back(node)
+    best_path = []
+    current_node = node
+    until best_path.first == @root_node.value
+      best_path.unshift(current_node.value)
+      current_node = current_node.parent
+    end
   end
   
   def build_move_tree
@@ -19,9 +34,7 @@ class KnightPathFinder
         child.parent = current_node
         queue << child
       end 
-      
-    end
-    
+    end  
   end
   
   def valid_moves(pos)
